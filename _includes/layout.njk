@@ -1,0 +1,17 @@
+---
+layout: base.njk
+---
+
+{%- if theme -%}
+    <style>
+        :root {
+            {%- for brightness in [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] %}
+            --colour-theme-{{brightness}}: var(--colour-{{theme}}-{{brightness}});
+            {%- endfor %}
+        }
+    </style>
+{%- endif %}
+
+<main>
+    {{ content | safe }}
+</main>
