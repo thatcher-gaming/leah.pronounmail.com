@@ -1,6 +1,8 @@
 ---
 layout: layout.njk
 theme: aubergine
+head: |-
+    <link rel="stylesheet" href="/assets/blog.css">
 ---
 
 <header class="section">
@@ -8,6 +10,15 @@ theme: aubergine
     <h1>blog</h1>
 </header>
 
-<div class="stuff">
-    coming <em>soon!!</em>
-</div>
+<ul class="posts">
+    {%- for post in collections.posts -%}
+    <li>
+        <a href="{{post.url | safe}}">
+            <h2>{{ post.data.title }}</h2>
+            <div class="details">
+                <time datetime="{{ post.date.toUTCString() }}">{{ post.date.toDateString() }}</time>
+            </div>
+        </a>
+    </li>
+    {%- endfor -%}
+</ul>

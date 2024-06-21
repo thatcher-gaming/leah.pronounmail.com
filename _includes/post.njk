@@ -1,0 +1,19 @@
+---
+layout: layout.njk
+theme: aubergine
+head: |-
+    <link rel="stylesheet" href="/assets/blog.css">
+---
+
+
+<header class="post" style="--nav-fg: black; --nav-text: white;">
+    {% include "bits/navigation.njk" %}
+    <h1>{{ title }}</h1>
+    <section class="details">
+        published {{ page.date.toDateString() }}
+    </section>
+</header>
+
+<div class="stuff">
+    {{ content | safe }}
+</div>

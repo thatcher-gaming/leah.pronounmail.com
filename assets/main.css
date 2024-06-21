@@ -168,6 +168,7 @@ header.section {
 
 nav.site {
 	--fg: var(--nav-fg, var(--colour-theme-50));
+	--text: var(--nav-text, var(--colour-theme-600));
 
 	display: flex;
 	width: max-content;
@@ -188,7 +189,7 @@ nav.site {
 
 		&:hover {
 			background-color: var(--fg);
-			color: var(--colour-theme-600);
+			color: var(--text);
 		}
 	}
 
