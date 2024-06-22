@@ -194,12 +194,13 @@ nav.site {
 	}
 
 	@media screen and (max-width: 64rem) {
-		grid-column: 1 / span 2;
-		justify-self: center;
+		header.section > & {
+			grid-column: 1 / span 2;
+			justify-self: center;
+		}
 	}
 
 	@media screen and (max-width: 30rem) {
-
 		& > :not(:has( > b)) {
 			display: none;
 		}

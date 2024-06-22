@@ -1,0 +1,8 @@
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{% defblock \"head\" %}\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{% enddefblock %}\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{% defblock \"head\" %} h {% enddefblock %}\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{% defblock \"head\" %}  {% enddefblock %}\\E$"}
+{"rule":"WHITESPACE_RULE","sentence":"^\\Q{% defblock \"head\" %}  {% enddefblock %}\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{% endmacro %}\\E$"}
+{"rule":"WHITESPACE_RULE","sentence":"^\\Q{% macro album(title, artist, cover) %}    {{ title }} by {{ artist }}  {{ caller() }}  {% endmacro %}\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q{% macro album(title, artist, cover) %}    {{ title }} by {{ artist }}  {{ caller() }}  {% endmacro %}\\E$"}
