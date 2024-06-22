@@ -5,10 +5,9 @@ head: |-
     <link rel="stylesheet" href="/assets/blog.css">
 ---
 
-
 <header class="post" style="--nav-fg: black; --nav-text: white;">
     {% include "bits/navigation.njk" %}
-    <h1>{{ title }}</h1>
+    <h1>{{ longtitle if longtitle else title }}</h1>
     <section class="details">
         published {{ page.date.toDateString() }}
     </section>

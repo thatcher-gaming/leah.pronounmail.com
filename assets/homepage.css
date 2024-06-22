@@ -1,11 +1,11 @@
-article {
+main {
     display: grid;
     grid-template-columns: 1fr 2fr;
     min-height: 100vh;
     max-height: 100vh;
     overflow: hidden;
 
-    main > a {
+    div.kinks > a {
         display: flex;
         place-items: center;
         background-color: var(--colour);
@@ -35,7 +35,7 @@ article {
     }
 }
 
-main {
+div.kinks {
     display: grid;
     grid-template-rows: max-content;
 }
@@ -62,7 +62,7 @@ header {
     }
 }
 
-section.lede {
+.lede {
     margin: 0 1rem;
     p {
         color: var(--colour-grey-90);
@@ -72,12 +72,12 @@ section.lede {
 }
 
 @media screen and (max-width: 64rem) {
-    article {
+    main {
         max-height: unset;
         grid-template-columns: 1fr;
     }
 
-    article > main > a {
+    main > div.kinks > a {
         font-size: 4rem;
         line-height: .9em;
         padding: .5rem;
