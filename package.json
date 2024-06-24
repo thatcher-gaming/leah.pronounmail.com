@@ -1,5 +1,11 @@
 {
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "@11ty/eleventy": "^2.0.1",
+    "@types/node": "^20.14.8",
+    "coffeescript": "^2.7.0",
+    "dotenv": "^16.4.5"
+  },
+  "dependencies": {
+    "@11ty/eleventy-fetch": "^4.0.1"
   }
 }

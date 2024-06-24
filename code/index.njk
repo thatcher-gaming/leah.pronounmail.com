@@ -11,7 +11,15 @@ theme: ectoplasm
 
 <div class="stuff">
     <p>
-        eventually i'll migrate my code onto this site. for now, check out my 
+        eventually i'll migrate my code onto this site. for now, check out my
         <a href="https://sr.ht/~leah">sourcehut page</a>
     </p>
+
+    {% for forge, repos in repos %}
+        <h2>{{ forge }}</h2>
+        {% for repo in repos %}
+            {{ repo.name }}
+        {% endfor %}
+    {% endfor %}
+
 </div>
