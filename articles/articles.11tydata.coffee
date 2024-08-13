@@ -1,8 +1,7 @@
-module.exports = {
+module.exports =
 	tags: [
-		"posts"
+		"articles"
 	],
 	"layout": "post.njk",
 	"permalink": "blog/{{ title | slugify }}/index.html",
 	"date": "git Last Modified"
-};

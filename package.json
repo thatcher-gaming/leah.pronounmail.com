@@ -3,7 +3,10 @@
     "@11ty/eleventy": "^2.0.1",
     "@types/node": "^20.14.8",
     "coffeescript": "^2.7.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "fast-glob": "^3.3.2",
+    "gray-matter": "^4.0.3",
+    "node-retrieve-globals": "^6.0.0"
   },
   "dependencies": {
     "@11ty/eleventy-fetch": "^4.0.1"

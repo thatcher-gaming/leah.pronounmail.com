@@ -1,5 +1,6 @@
 ---
 title: welcome to the leah clark blog
+date: 2024-06-22
 ---
 
 

@@ -1,0 +1,74 @@
+---coffeescript
+title = "blog"
+layout = "layout.njk"
+theme = "aubergine"
+head = """<link rel="stylesheet" href="/assets/blog.css">"""
+
+get_image = (service) ->
+    switch service
+        when "cohost" then "/assets/logos/cohost.svg"
+        when "mastodon" then "/assets/logos/mastodon.svg"
+        when "bluesky" then "/assets/logos/bsky.svg"
+
+eleventyComputed =
+    posts: (data) ->
+        data.collections.articles.concat(data.collections.memos)
+---
+
+<header class="section">
+    {% include "bits/navigation.njk" %}
+    <h1>blog</h1>
+</header>
+
+{% macro article(post) %}
+<li class="article-item">
+    <a href="{{ post.url | safe }}">
+        <h2>{{ post.data.title }}</h2>
+        <div class="details">
+            <time datetime="{{ post.date.toUTCString() }}">{{ post.date.toDateString() }}</time>
+        </div>
+    </a>
+</li>
+{% endmacro %}
+
+{% macro memo(post) %}
+<li class="memo-item">
+    <h2>
+        <a href="/blog/{{post.page.fileSlug | slugify}}">
+            <time datetime="{{ post.date.toUTCString() }}">
+                {{ post.date.toDateString() }}
+            </time>
+        </a>
+    </h2>
+
+    <div class="content prose">
+        {{ post.content | safe }}
+    </div>
+
+    <div class="elsewhere">
+        {% if post.data.elsewhere %}
+        <h3>elsewhere:</h3>
+
+        <ul class="services">
+            {% for service, link in post.data.elsewhere | dictsort %}
+                <li class="service">
+                    <a href="{{ link }}" target="_blank" rel="noreferrer">
+                        <img src="{{ get_image(service) }}" alt="" aria-hidden>{{ service }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</li>
+{% endmacro %}
+
+<ul class="posts">
+    {%- for post in (posts | sort(true, false, "page.date"))  -%}
+        {% if post.data.tags.includes("articles") %}
+            {{ article(post) }}
+        {% else %}
+            {{ memo(post) }}
+        {% endif %}
+    {%- endfor -%}
+</ul>

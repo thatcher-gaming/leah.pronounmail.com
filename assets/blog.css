@@ -5,57 +5,157 @@ ul.posts {
 
     display: flex;
     flex-direction: column;
+}
 
-    a {
-        display: grid;
-        grid-template-columns: 1fr min(100%, var(--inner-width)) 1fr;
-        background-color: var(--colour-theme-50);
-        text-decoration: none;
-        gap: 1rem;
-        padding: .5rem 0;
+li.article-item > a {
+    display: grid;
+    grid-template-columns: 1fr min(100%, var(--inner-width)) 1fr;
+    background-color: var(--colour-theme-50);
+    text-decoration: none;
+    gap: 1rem;
+    padding: .5rem 0;
+
+    h2 {
+        margin: 0;
+        grid-column: 2;
+        font-size: 4rem;
+        /* font-stretch: 75%; */
+        font-weight: 300;
+        letter-spacing: -0.025em;
+        line-height: 1;
+        color: var(--colour-theme-950);
+    }
+
+    .details {
+        padding: 1rem 0;
+    }
+
+    &:hover {
+        background-color: var(--colour-theme-200);
+    }
+
+    @media screen and (max-width: 72rem) {
+        grid-template-columns: 1fr;
+        padding: 1rem;
 
         h2 {
-            margin: 0;
-            grid-column: 2;
-            font-size: 4rem;
-            /* font-stretch: 75%; */
-            font-weight: 300;
-            letter-spacing: -0.025em;
-            line-height: 1;
-            color: var(--colour-theme-950);
+            grid-column: 1;
         }
 
         .details {
-            padding: 1rem 0;
-        }
-
-        &:hover {
-            background-color: var(--colour-theme-200);
-        }
-
-        @media screen and (max-width: 72rem) {
-            grid-template-columns: 1fr;
-            padding: 1rem;
-
-            h2 {
-                grid-column: 1;
-            }
-
-            .details {
-                grid-row: 1;
-                padding-bottom: 0;
-            }
-        }
-    }
-
-    li:nth-child(even) > a {
-        background-color: var(--colour-theme-100);
-
-        &:hover {
-            background-color: var(--colour-theme-200);
+            grid-row: 1;
+            padding-bottom: 0;
         }
     }
 }
+
+li.article-item:nth-child(even) > a {
+    background-color: var(--colour-theme-100);
+
+    &:hover {
+        background-color: var(--colour-theme-200);
+    }
+}
+
+li.memo-item {
+    align-self: center;
+    max-width: 48rem;
+    width: 100%;
+    margin: 1rem 0;
+
+    display: grid;
+    grid-template-columns: max-content auto;
+
+    .content {
+        grid-column: 1 / span 2;
+        margin: .5rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        &:first-of-type {
+            margin-top: 0;
+        }
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    h2, .elsewhere {
+        background-color: var(--colour-theme-100);
+        padding: .25rem .5rem;
+    }
+
+    h2 {
+        grid-row: 2;
+        grid-column: 1;
+
+        font: inherit;
+        margin: 0;
+        color: var(--colour-grey-900);
+        font-weight: 600;
+        font-size: .85rem;
+
+        a:not(:hover) {
+            text-decoration: none;
+        }
+    }
+
+    h3 {
+        font-size: .75rem;
+        margin: 0;
+        text-transform: uppercase;
+        font-weight: 400;
+        color: var(--colour-grey-950);
+    }
+
+    .elsewhere {
+        grid-row: 2;
+        grid-column: 2;
+
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: .5rem;
+
+        font-size: .75rem;
+        text-transform: uppercase;
+    }
+
+    ul.services {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+
+        > li > a {
+            font: inherit;
+            text-transform: uppercase;
+            font-size: inherit;
+
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+
+            &:not(:hover) {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .footer {
+        margin-top: 1rem;
+        background-color: var(--colour-theme-200);
+        padding: .25rem .5rem;
+        font-size: .95rem;
+        border-radius: 2px;
+    }
+}
+
 
 header.post {
     padding: 0 calc((100% - var(--inner-width)) / 2);
