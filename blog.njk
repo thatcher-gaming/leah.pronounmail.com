@@ -9,6 +9,7 @@ get_image = (service) ->
         when "cohost" then "/assets/logos/cohost.svg"
         when "mastodon" then "/assets/logos/mastodon.svg"
         when "bluesky" then "/assets/logos/bsky.svg"
+        when "rss" then "/assets/logos/rss.svg"
 
 eleventyComputed =
     posts: (data) ->
@@ -19,6 +20,25 @@ eleventyComputed =
     {% include "bits/navigation.njk" %}
     <h1>blog</h1>
 </header>
+
+<div class="section-extra">
+    <a href="https://tilde.zone/@leah" target="_blank">
+        <img src="{{ get_image("mastodon") }}" alt="" aria-hidden>
+        mastodon
+    </a>
+    <a href="https://cohost.org/leahc" target="_blank">
+        <img src="{{ get_image("cohost") }}" alt="" aria-hidden>
+        cohost
+    </a>
+    <a href="https://bsky.app/profile/leah.pronounmail.com" target="_blank">
+        <img src="{{ get_image("bluesky") }}" alt="" aria-hidden>
+        bluesky
+    </a>
+    <a href="/feed.xml">
+        <img src="{{ get_image("rss") }}" alt="" aria-hidden>
+        rss (well, atom)
+    </a>
+</div>
 
 {% macro article(post) %}
 <li class="article-item">
@@ -51,11 +71,11 @@ eleventyComputed =
 
         <ul class="services">
             {% for service, link in post.data.elsewhere | dictsort %}
-                <li class="service">
-                    <a href="{{ link }}" target="_blank" rel="noreferrer">
-                        <img src="{{ get_image(service) }}" alt="" aria-hidden>{{ service }}
-                    </a>
-                </li>
+            <li class="service">
+                <a href="{{ link }}" target="_blank" rel="noreferrer">
+                    <img src="{{ get_image(service) }}" alt="" aria-hidden>{{ service }}
+                </a>
+            </li>
             {% endfor %}
         </ul>
         {% endif %}
