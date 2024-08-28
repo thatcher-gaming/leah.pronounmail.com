@@ -1,0 +1,162 @@
+---
+layout: layout.njk
+theme: ectoplasm
+permalink: "/code/repo.php"
+head: '<link rel="stylesheet" href="/assets/code.css">'
+---
+
+{% from "bits/pathbar.njk" import pathbar %}
+
+<?php
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
+
+    require '/home/leah/leah.pronounmail.com/vendor/autoload.php';
+    $git = new CzProject\GitPhp\Git;
+    define("REPO_DIR", "/var/repo");
+
+    $uri = $_SERVER['REQUEST_URI'];
+    // append trailing slash if none exists, for consistency
+    if (!str_ends_with($uri, "/")) {
+        $uri = $uri . "/";
+    }
+
+    $bits = explode("/", $uri);
+    $repo_name = $bits[2];
+    $path = REPO_DIR . "/" . $repo_name;
+    $desc_content = "";
+
+    if (!file_exists($path)) {
+        http_response_code(404);
+        exit("couldn't find that repo, sorry.");
+    }
+
+    $repo = $git->open($path);
+
+    $desc_paths = [$path . '/.git/description', $path . '/description'];
+    foreach ($desc_paths as $path) {
+        if (file_exists($path)) {
+            $desc_content = file_get_contents($path);
+            break;
+        }
+    }
+
+    $files = array_map(function($x) {
+        [$details, $name] = explode("\x09", $x);
+        [$mode, $type, $hash] = explode(" ", $details);
+        if ($type == "tree") {
+            $icon = "📂";
+        } else {
+            $name_bits = explode(".", $name);
+            $ext = end($name_bits);
+            $icon = match (strtolower($name)) {
+                "package.json" => "📦",
+                "package-lock.json", "pnpm-lock.yaml" => "🔒",
+                "license", "licence", "copying" => "🖋️",
+                "readme.md", "readme", "readme.txt" => "💡",
+                ".gitignore" => "⛔",
+                default => match ($ext) {
+                    "yaml", "yml", "toml", "json" => "🔨",
+                    "js", "ts", "jsx", "tsx" => "📜",
+                    "md", "txt" => "🖊️",
+                    default => "📃"    
+                }
+            };
+        }
+
+        return array(
+            "name" => $name,
+            "mode" => $mode,
+            "type" => $type,
+            "hash" => $hash,
+            "icon" => $icon,
+        );
+    }, $repo->execute('ls-tree', 'HEAD'));
+
+    $log = $repo->execute('log', '--pretty=format:%H', '-n', '3');
+
+    $readme = null;
+    
+    foreach($files as $file) {
+        $lower = strtolower($file['name']);
+        if ($lower == "readme" || str_starts_with($lower, "readme.")) {
+            $content = $repo->execute("cat-file", "blob", $file['hash']);
+            global $readme;
+            $readme = join("\n", $content);
+        }
+    }
+    ?>
+
+{{ pathbar([
+    ["/code/", "computer", ""],
+    ["/code/<?= $repo_name ?>", "<?= $repo_name ?>", "bold"]
+]) }}
+
+<div class="repo-stuff">
+    <header class="repo-header">
+        <h1><?= $repo_name ?></h1>
+    </header>
+    <aside class="info">
+        <h2>description</h2>
+        <?php if ($desc_content) { ?>
+            <p><?= $desc_content ?></p>
+        <?php } ?>
+        
+        <h2>clone</h2>
+        <p>(todo)</p>
+
+        <article class="commit-list">
+            <h2>commits</h2>
+            <div class="list">
+            <?php 
+                foreach ($log as $id) { 
+                    $commit = $repo->getCommit($id); ?>
+                    <article>
+                        <span class="author">
+                            <?= $commit->getAuthorName() ?>
+                        </span>
+                        <p>
+                            <?= $commit->getSubject() ?>
+                        </p>
+                        
+                        <time datetime="<?= $commit->getDate()->format("c") ?>">
+                            <?= $commit->getDate()->format("@B — D jS M Y") ?>
+                        </time>
+                    </article>
+            <?php } ?>
+            </div>
+            <a class="more" href="<?= $uri ?>commits">more</a>
+        </article>
+
+        <h2>branches</h2>
+        <p>(todo)</p>
+
+        <h2>tags</h2>
+        <p>(todo)</p>
+    </aside>
+
+    <div class="files">
+        <h2>files</h2>
+        <ul>
+            <?php foreach ($files as $file) { ?>
+                <li>
+                    <span aria-hidden class="icon">
+                        <?= $file['icon'] ?>
+                    </span>
+                    <span class="name">
+                        <?= $file['name'] ?>
+                    </span>
+                </li>
+            <?php } ?>
+        </ul>
+
+    </div>
+    <?php if ($readme) { ?>
+        <article class="readme prose">
+            <h2 class="fancy">Readme</h2>
+            <?php $Parsedown = new Parsedown(); ?>
+            <?= $Parsedown->text($readme); ?>
+        </article>
+    <?php } ?>
+</div>

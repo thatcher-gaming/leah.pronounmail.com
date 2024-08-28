@@ -1,0 +1,9 @@
+{% macro pathbar(items=[]) %}
+<nav class="pathbar">
+    <a class="home" href="/" aria-label="leah.pronounmail.com">✻</a>
+
+    {% for item in items %}
+        <a class="link {{ item[2] if item[2] }}" href="{{ item[0] | safe }}">{{ item[1] | safe }}</a>
+    {% endfor %}
+</nav>
+{% endmacro %}

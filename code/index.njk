@@ -2,7 +2,19 @@
 title: computer
 layout: layout.njk
 theme: ectoplasm
+permalink: /code/index.php
+head: '<link rel="stylesheet" href="/assets/code.css">'
 ---
+
+<?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+define("REPO_DIR", "/var/repo");
+
+require '/home/leah/leah.pronounmail.com/vendor/autoload.php'; 
+?>
 
 <header class="section">
     {% include "bits/navigation.njk" %}
@@ -14,12 +26,34 @@ theme: ectoplasm
         eventually i'll migrate my code onto this site. for now, check out my
         <a href="https://sr.ht/~leah">sourcehut page</a>
     </p>
-
-    {% for forge, repos in repos %}
-        <h2>{{ forge }}</h2>
-        {% for repo in repos %}
-            {{ repo.name }}
-        {% endfor %}
-    {% endfor %}
-
 </div>
+
+<div class="stuff">
+    <h2>ignore this it's a work in progress</h2>
+</div>
+
+<ul class="repo-grid">
+    <?php
+    foreach (new DirectoryIterator(REPO_DIR) as $file) {
+        if($file->isDot() || $file->isLink() || $file->isFile()) continue;
+        $name = $file->getFilename();
+        $path = $file->getPathname();
+    ?>
+    <li>
+        <a href="/code/<?= $name ?>">
+            <h2><?= $name ?></h2>
+            <p>
+                <?php
+                $desc_paths = [$path . '/.git/description', $path . '/description'];
+                foreach ($desc_paths as $path) {
+                    if (file_exists($path)) {
+                        echo file_get_contents($path);
+                        break;
+                    }
+                }
+                ?>
+            </p>
+        </a>
+    </li>
+    <?php } ?>
+</ul>

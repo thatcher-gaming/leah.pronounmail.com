@@ -311,3 +311,53 @@ p.callout {
         margin-top: 0.25rem;
     }
 }
+
+nav.pathbar {
+    color: var(--colour-grey-900);
+    border: 1px solid var(--colour-grey-700);
+    border-radius: 12px;
+    display: flex;
+    max-width: var(--inner-width);
+    margin: 2rem auto;
+    height: 3rem;
+
+    a {
+        display: flex;
+        align-items: center;
+        place-content: center;
+    }
+
+    .home {
+        aspect-ratio: 1 / 1;
+        background-color: var(--colour-theme-500);
+        color: white;
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: 900;
+        line-height: 1;
+        user-select: none;
+        margin: -1px;
+        margin-right: 0;
+        border-radius: inherit;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        &:hover {
+            background-color: var(--colour-theme-600);
+        }
+    }
+
+    .link {
+        text-decoration: none;
+        padding: 0 1.25rem;
+        border-right: 1px solid var(--colour-grey-400);
+
+        &.bold {
+            font-weight: 700;
+        }
+
+        &:hover {
+            background-color: var(--colour-grey-100);
+        }
+    }
+}
