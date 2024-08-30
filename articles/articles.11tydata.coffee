@@ -3,5 +3,5 @@ module.exports =
 		"articles"
 	],
 	"layout": "post.njk",
-	"permalink": "blog/{{ title | slugify }}/index.html",
+	"permalink": "blog/{{ page.fileSlug }}/",
 	"date": "git Last Modified"
