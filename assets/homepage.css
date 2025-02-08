@@ -4,13 +4,12 @@ main {
     grid-auto-rows: 8rem;
     min-height: 100dvh;
     gap: 2rem;
-    background: linear-gradient(to bottom, white 0,
+    background: linear-gradient(in oklch, white 0,
             white 22rem,
             var(--colour-aubergine-500) 22rem,
             var(--colour-bubblegum-500) 36rem,
-            var(--colour-yellow-500) 46rem,
+            var(--colour-yellow-500) 48rem,
             var(--colour-ectoplasm-500) 56rem,
-            var(--colour-weezer-500) 66rem,
             var(--colour-weezer-500) 73rem,
             var(--colour-grey-950) 73rem);
     padding-bottom: 1rem;
