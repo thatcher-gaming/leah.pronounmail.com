@@ -7,7 +7,7 @@ head: |-
 
 <header class="post" style="--nav-fg: black; --nav-text: white;">
     {% include "bits/navigation.njk" %}
-    <h1>{{ longtitle if longtitle else title }}</h1>
+    <h1>{{ longtitle | safe if longtitle else title }}</h1>
     <section class="details">
         published {{ page.date.toDateString() }}
     </section>
