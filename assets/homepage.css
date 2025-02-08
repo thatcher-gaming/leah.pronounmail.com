@@ -17,6 +17,7 @@ main {
 }
 
 header {
+    place-self: center;
     h1 {
         font-size: 16.9vw;
         line-height: .8;
