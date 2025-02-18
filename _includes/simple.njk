@@ -1,0 +1,12 @@
+---
+layout: layout.njk
+---
+
+<header class="neo-page">
+    {% include "bits/neonavigation.njk" %}
+    <h1>{{title}}</h1>
+</header>
+
+<div class="stuff">
+    {{content | safe}}
+</div>
