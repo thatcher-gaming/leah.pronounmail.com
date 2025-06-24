@@ -1,43 +1,48 @@
 main {
+    --top: max(24vw, 24rem);
+
     display: grid;
-    grid-template-rows: 22rem;
+    grid-template-rows: var(--top);
     grid-auto-rows: 8rem;
     min-height: 100dvh;
     gap: 2rem;
     background: linear-gradient(in oklch, white 0,
-            white 22rem,
-            var(--colour-aubergine-500) 22rem,
-            var(--colour-bubblegum-500) 38rem,
-            var(--colour-yellow-500) 48rem,
-            var(--colour-ectoplasm-500) 58rem,
-            var(--colour-weezer-500) 73rem,
-            var(--colour-grey-950) 73rem);
+            white var(--top),
+            var(--colour-aubergine-500) var(--top),
+            var(--colour-bubblegum-500) calc(var(--top) + (12rem * 1)),
+            var(--colour-yellow-500) calc(var(--top) + (12rem * 2)),
+            var(--colour-ectoplasm-500) calc(var(--top) + (12rem * 3)),
+            var(--colour-weezer-500) calc(var(--top) + (12.75rem * 4)),
+            var(--colour-grey-950) calc(var(--top) + (12.75rem * 4)));
     padding-bottom: 1rem;
+    overflow-x: hidden;
 }
 
 header {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
 
     height: 100%;
     
     h1 {
-        font-size: clamp(6rem, 16.25vw, 1000rem);
+        font-size: clamp(8rem, 16.25vw, 1000rem);
         line-height: .8;
         padding: 1rem;
+        padding-bottom: 0;
         text-transform: uppercase;
         font-stretch: ultra-condensed;
         text-align: center;
-        overflow: hidden;
         width: 100vw;
         height: auto;
+        place-self: center;
         margin: 0;
     }
 }
 
 .intro {
-    margin: auto;
+    margin: 0;
     margin-bottom: 2rem;
     font-size: 1.75rem;
     line-height: 1.2;

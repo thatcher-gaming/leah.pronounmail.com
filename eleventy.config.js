@@ -1,4 +1,5 @@
 import coffeescript from "coffeescript";
+import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import { RetrieveGlobals } from "node-retrieve-globals";
 import "coffeescript/register.js";
 import "dotenv/config";
@@ -52,7 +53,27 @@ export default function (eleventyConfig) {
                 });
             }
         }
-    })
+    });
+
+    eleventyConfig.addPlugin(feedPlugin, {
+        type: "atom", // or "rss", "json"
+        outputPath: "/feed.xml",
+        collection: {
+            name: "articles",
+            limit: 0,
+        },
+        metadata: {
+            language: "en",
+            title: "Leah's Cool Blog",
+            subtitle: "i'm awesome",
+            base: "https://leah.pronounmail.com/blog/",
+            author: {
+                name: "Leah Clark",
+                email: "leah@pronounmail.com",
+            }
+        }
+    });
+
 
     return {
         markdownTemplateEngine: "njk",

@@ -156,6 +156,10 @@ body {
     padding: 0;
 }
 
+main {
+    min-height: 100vh;
+}
+
 em {
     color: var(--colour-theme-500);
 }
@@ -224,14 +228,14 @@ nav.site {
     }
 
     @media screen and (max-width: 64rem) {
-        header.section>& {
+        header.section > & {
             grid-column: 1 / span 2;
             justify-self: center;
         }
     }
 
     @media screen and (max-width: 30rem) {
-        &> :not(:has(> b)) {
+        & > :not(:has(> b)) {
             display: none;
         }
     }
@@ -245,7 +249,7 @@ div.stuff {
 
     font-size: 1.1rem;
 
-    header+& {
+    header + & {
         margin-top: 2rem;
     }
 }
@@ -300,7 +304,7 @@ div.stuff {
             padding-right: 2rem;
         }
 
-        li+li {
+        li + li {
             margin-top: 0.25rem;
         }
     }
@@ -414,17 +418,51 @@ header.neo-page {
     display: grid;
     place-items: center;
     background: linear-gradient(to bottom, var(--bg), white);
+
     h1 {
         color: var(--colour-theme-200);
         mix-blend-mode: color-burn;
-        pointer-events: none;
         user-select: none;
         -webkit-user-select: none;
+        cursor: default;
+        pointer-events: none;
         text-transform: uppercase;
         font-stretch: 50%;
         font-size: 36vw;
         font-weight: 200;
         margin: 0;
         line-height: 1;
+    }
+}
+
+footer.site-footer {
+    background: linear-gradient(to bottom,
+            transparent,
+            var(--colour-theme-200));
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 8rem;
+    padding: 1rem;
+
+    h1,
+    span {
+        font-size: 8rem;
+        white-space: nowrap;
+        color: var(--colour-theme-200);
+        mix-blend-mode: color-burn;
+
+        user-select: none;
+        -webkit-user-select: none;
+        cursor: default;
+
+        margin: 0;
+        font-stretch: 0%;
+        font-weight: 100;
+        text-transform: uppercase;
+        line-height: .75;
+        letter-spacing: -.02em;
     }
 }

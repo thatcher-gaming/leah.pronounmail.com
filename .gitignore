@@ -3,3 +3,4 @@ _site
 .cache
 .env
 vendor
+.DS_Store
